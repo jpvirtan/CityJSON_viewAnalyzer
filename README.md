@@ -1,4 +1,5 @@
 A browser based tool for running a semantic view analysis from CityJSON models. 
+
 Based on the (archived) CityJSON viewer, available at: https://github.com/tudelft3d/CityJSON-viewer
 
 Original viewer developed mostly developed through projects in the course "Research Assignment"(https://3d.bk.tudelft.nl/courses/geo5010/) 
@@ -22,4 +23,6 @@ Please see the LICENCE.txt for licence information.
 
 Developed with support from the Helsinki Innovation Fund.
 
-If you find this beneficial, and utilize this in research, we kindly ask you to cite the original manuscript describing the software:
+If you find this beneficial, and utilize this in research, we kindly encourage you to cite the original manuscript describing the software:
+Virtanen, J-P.; Jaalama, K.; Puustinen, T.; Julin, A.; Hyyppä, J.; Hyyppä, H. 
+Near real-time semantic view analysis of 3D city models in web browser. ISPRS Int. J. GeoInf. 2021
