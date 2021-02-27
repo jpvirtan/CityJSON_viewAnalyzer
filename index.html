@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset=utf-8>
+    <title>CityJSON viewer</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/earcut@2.1.5/dist/earcut.dev.min.js"></script>
+    <script src="js/three.min.js"></script>
+    <script src="js/OrbitControls.js"></script>
+    <script src="js/viewer.js"></script>
+    <script src="js/functions.js"></script>
+    <script src="js/analysis.js"></script>
+
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/cityjson.css">
+    <link rel="stylesheet" href="css/controls.css">
+</head>
+
+<body>
+
+    <div class="uiButton dbText" style="visibility: hidden; position: absolute; top: 0px; left: 30px;" id="showSideBarButton"onclick="document.getElementById('pageHelper').style.visibility = 'visible'; document.getElementById('showSideBarButton').style.visibility = 'hidden';">
+        Show sidebar
+    </div>
+
+    <div id="pageHelper">
+        <div class="uiButton dbText" onclick="document.getElementById('pageHelper').style.visibility = 'hidden'; document.getElementById('showSideBarButton').style.visibility = 'visible';">
+            Hide sidebar
+        </div>
+
+        <div id="dropboxBox">
+            <form id="dropbox" class="my-form">
+                <p><img class="logo" src="img/cityjson_logo.svg" width="150"></p>
+                <p class="dbText">Drop your file here,<br> or click to open</p>
+                <input type="file" id="fileElem" accept=".json" onchange="handleFiles(this.files,0)" multiple style="display: none">
+            </form>
+        </div>
+
+        <div class="uiButton dbText" id="controlsButton" onclick="setUpControls(false);">
+            Swith to keyboard controls
+        </div>
+
+        <div class="uiButton dbText" id="analysisButton" onclick="runAnalysis(true);">
+            Run semantic view analysis
+        </div>
+
+        <div class="uiButton dbText" id="lightsButton" onclick="toggleAnalysisLighting();">
+            Display analysis rendering
+        </div>
+
+
+        <div id="buttonBox">
+            <label class="switch">
+                <input type="checkbox" id="wireframeBox" onclick="toggleWireframe()">
+                <span class="slider round"></span>
+                <p class="dbText">Show mesh edges</p>
+            </label>
+        </div>
+
+        <!-- <div id="filesBox" hidden="hidden">
+            <ul id="TreeView"></ul>
+        </div>
+        <div id="attributeBox" hidden="hidden">
+            <table id="attributeTable" cellpadding=5px>
+                <tr>
+                    <th>Attribute</th>
+                    <th>Value</th>
+                </tr>
+            </table>
+        </div>-->
+    </div>
+    <!-- <div id="dragger"></div> -->
+    <div class="loader" id="loader" hidden="hidden"></div>
+
+    <div id="viewerContainer"><div id="viewer"></div></div>
+    <div id="analysisPlot"><div class="uiButton dbTextstyle" onclick="document.getElementById('analysisPlot').style.visibility = 'hidden';">Close analysis plot</div></div>
+
+    <div id="keyboardHelpBox" class="textBox">
+        <b>Keyboard navigation</b>
+        <table>
+            <tr><td><b>Key</b></td><td><b>Command</b></td></tr>
+            <tr><td colspan="2"><b>Camera movement</b></td></tr>
+            <tr><td>W</td><td>Move forward</td></tr>
+            <tr><td>S</td><td>Move backward</td></tr>
+            <tr><td>A</td><td>Move left (strafe)</td></tr>
+            <tr><td>D</td><td>Move right (strafe)</td></tr>
+            <tr><td colspan="2"><b>Camera height</b></td></tr>
+            <tr><td>Q</td><td>Raise camera</td></tr>
+            <tr><td>E</td><td>Lower camera</td></tr>
+            <tr><td colspan="2"><b>Camera rotation (pan and tilt)</b></td></tr>
+            <tr><td>Up arrow</td><td>Tilt camera up</td></tr>
+            <tr><td>Down arrow</td><td>Tilt camera down</td></tr>
+            <tr><td>Left arrow</td><td>Pan camera left</td></tr>
+            <tr><td>Right arrow</td><td>Pan camera right</td></tr>
+            <tr><td colspan="2"><b>Movement speed (camera move increment)</b></td></tr>
+            <tr><td>1</td><td>Movement speed 1 (low)</td></tr>
+            <tr><td>2</td><td>Movement speed 2 </td></tr>
+            <tr><td>3</td><td>Movement speed 3 (default)</td></tr>
+            <tr><td>4</td><td>Movement speed 4 </td></tr>
+            <tr><td>5</td><td>Movement speed 5 (high)</td></tr>
+
+        </table>
+        <br />
+        <div class="uiButton dbTextstyle" onclick="document.getElementById('keyboardHelpBox').style.visibility = 'hidden';">Close keyboard help</div>
+    </div>
+
+
+    <div id="axisHelper"></div>
+    <script>
+		$(document).ready(function() {
+			initDocument();
+			initViewer();
+		});
+    </script>
+</body>
+
+</html>
